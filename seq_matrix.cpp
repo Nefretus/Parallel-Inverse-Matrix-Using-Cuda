@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<cstdlib> 
+#include<chrono>
 
 // zrodla:
 // https://cse.buffalo.edu/faculty/miller/Courses/CSE633/thanigachalam-Spring-2014-CSE633.pdf
@@ -36,7 +37,7 @@ void print_matrix(std::vector<std::vector<float>>& matrix, const std::string& me
 void calculate_inverse_seq(size_t size) {
 	auto input_matrix = generate_matrix(size);
 	auto identity = create_identity(size);
-	print_matrix(input_matrix, "Input matrix: ");
+	//print_matrix(input_matrix, "Input matrix: ");
 	for (int i = 0; i < size; i++) {
 		bool inverse_exists = true;
 		if (input_matrix[i][i] == 0) {
@@ -76,12 +77,17 @@ void calculate_inverse_seq(size_t size) {
 			}
 		}
 	}
-	print_matrix(identity, "Inverse matrix: ");
+	//print_matrix(identity, "Inverse matrix: ");
 }
 
-int main(int argv, char** argc) {
-	constexpr size_t size = 3;
-	calculate_inverse_seq(size);
-	return 0;
-}
+//int main(int argv, char** argc) {
+//	constexpr size_t max_size = 1000;
+//	auto start = std::chrono::high_resolution_clock::now();
+//	for (size_t size = 10; size <= max_size; size+=10) {
+//		start = std::chrono::high_resolution_clock::now();
+//		calculate_inverse_seq(size);
+//		std::cout << "Size " << size << " inversion time: " << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count() << " ms " << std::endl;
+//	}
+//	return 0;
+//}
 

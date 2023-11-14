@@ -2,11 +2,13 @@
 #include<vector>
 #include<cstdlib> 
 #include<chrono>
+#include"seq_matrix.h"
 
 // zrodla:
 // https://cse.buffalo.edu/faculty/miller/Courses/CSE633/thanigachalam-Spring-2014-CSE633.pdf
 
 std::vector<std::vector<float>> generate_matrix(size_t size) {
+	srand(1);
 	std::vector<std::vector<float>> matrix;
 	matrix.reserve(size);
 	for (int i = 0; i < size; i++) {
@@ -34,10 +36,9 @@ void print_matrix(std::vector<std::vector<float>>& matrix, const std::string& me
 	}
 }
 
-void calculate_inverse_seq(size_t size) {
-	auto input_matrix = generate_matrix(size);
-	auto identity = create_identity(size);
+void calculate_inverse_seq(std::vector<std::vector<float>>& input_matrix, std::vector<std::vector<float>>& identity) {
 	//print_matrix(input_matrix, "Input matrix: ");
+	size_t size = input_matrix.size();
 	for (int i = 0; i < size; i++) {
 		bool inverse_exists = true;
 		if (input_matrix[i][i] == 0) {
@@ -51,7 +52,7 @@ void calculate_inverse_seq(size_t size) {
 		}
 		if (!inverse_exists) {
 			std::cout << "Inverse matrix does not exists" << std::endl;
-			return;	
+			return;
 		}
 		float scale = input_matrix[i][i];
 		for (int j = 0; j < size; j++) {
@@ -79,15 +80,3 @@ void calculate_inverse_seq(size_t size) {
 	}
 	//print_matrix(identity, "Inverse matrix: ");
 }
-
-//int main(int argv, char** argc) {
-//	constexpr size_t max_size = 1000;
-//	auto start = std::chrono::high_resolution_clock::now();
-//	for (size_t size = 10; size <= max_size; size+=10) {
-//		start = std::chrono::high_resolution_clock::now();
-//		calculate_inverse_seq(size);
-//		std::cout << "Size " << size << " inversion time: " << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count() << " ms " << std::endl;
-//	}
-//	return 0;
-//}
-

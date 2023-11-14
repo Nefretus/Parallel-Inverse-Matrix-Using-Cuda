@@ -130,10 +130,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="seq_matrix.cpp" />
+    <CudaCompile Include="parallel_matrix.cu" />
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="parallel_matrix.cu" />
+    <ClInclude Include="seq_matrix.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="seq_matrix.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
